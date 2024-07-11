@@ -161,6 +161,49 @@ class OrderItemByID(Resource):
 
         return make_response({'message': 'OrderItem deleted successfully'}, 200)
 
+from flask import request, make_response
+from flask_restful import Resource
+from models import Customer, db
+
+class Customers(Resource):
+    def get(self):
+        customers = Customer.query.all()
+        customers_list = [customer.to_dict() for customer in customers]
+        return make_response(customers_list, 200)
+    
+
+
+class CustomerByID(Resource):
+    def get(self, id):
+        customer = Customer.query.get(id)
+        if customer:
+            return make_response(customer.to_dict(), 200)
+        return make_response({'message': 'Customer not found'}, 404)
+
+    def patch(self, id):
+        customer_to_update = Customer.query.get(id)
+        if customer_to_update:
+            data = request.get_json()
+
+            if 'wallet' in data:
+                setattr(customer_to_update, 'wallet', data['wallet'])
+                db.session.add(customer_to_update)
+                db.session.commit()
+                return make_response(customer_to_update.to_dict(), 202)
+            return make_response({'message': 'Invalid data'}, 400)
+
+        return make_response({'message': 'Customer not found'}, 404)
+
+
+    def delete(self, id):
+        customer_to_delete = Customer.query.get(id)
+        if customer_to_delete:
+            db.session.delete(customer_to_delete)
+            db.session.commit()
+            return make_response({'message': 'Customer deleted'}, 200)
+        return make_response({'message': 'Customer not found'}, 404)
+
+
 api.add_resource(Home, '/')
 api.add_resource(Items, '/items')
 api.add_resource(ItemsByCategory, '/items/<category>')
@@ -169,6 +212,9 @@ api.add_resource(Orders, '/orders')
 api.add_resource(OrdersByID, '/orders/<int:id>')
 api.add_resource(OrderItems, '/orderitems')
 api.add_resource(OrderItemByID, '/orderitems/<int:id>')
+api.add_resource(Customers,'/customers')
+api.add_resource(CustomerByID,'/customers/<int:id>')
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
