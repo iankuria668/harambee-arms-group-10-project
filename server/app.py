@@ -106,14 +106,70 @@ class OrdersByID(Resource):
         else:
             return {'error': 'Order not found'}, 404
 
+class OrderItems(Resource):
+    def get(self):
+        order_items = [order_item.to_dict() for order_item in OrderItem.query.all()]
+        return make_response(order_items, 200)
         
-    
+    def post(self):
+        data = request.get_json()
+
+        new_order_item = OrderItem(
+            quantity = data['quantity'],
+            item_id = data['item_id'],
+            order_id = data['order_id'],
+        )
+
+        db.session.add(new_order_item)
+        db.session.commit()
+
+        return make_response(new_order_item.to_dict(), 201)
+
+class OrderItemByID(Resource):
+    def get(self, id):
+        order_item = OrderItem.query.filter(OrderItem.id == id).first()
+
+        if order_item is None:
+            return make_response({'error': 'OrderItem not found'}, 404)
+
+        return make_response(order_item.to_dict(), 200)
+
+    def patch(self, id):
+        order_item = OrderItem.query.filter(OrderItem.id == id).first()
+
+        if order_item is None:
+            return make_response({'error': 'OrderItem not found'}, 404)
+
+        data = request.get_json()
+        for key in data:
+            if hasattr(order_item, key):
+                setattr(order_item, key, data[key])
+
+        db.session.add(order_item)
+        db.session.commit()
+
+        return make_response(order_item.to_dict(), 200)
+
+    def delete(self, id):
+        order_item = OrderItem.query.filter(OrderItem.id == id).first()
+
+        if order_item is None:
+            return make_response({'error': 'OrderItem not found'}, 404)
+
+        db.session.delete(order_item)
+        db.session.commit()
+
+        return make_response({'message': 'OrderItem deleted successfully'}, 200)
+
 api.add_resource(Home, '/')
 api.add_resource(Items, '/items')
 api.add_resource(ItemsByCategory, '/items/<category>')
 api.add_resource(ItemsByID, '/items/<int:id>')
 api.add_resource(Orders, '/orders')
 api.add_resource(OrdersByID, '/orders/<int:id>')
+api.add_resource(OrderItems, '/orderitems')
+api.add_resource(OrderItemByID, '/orderitems/<int:id>')
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
 
