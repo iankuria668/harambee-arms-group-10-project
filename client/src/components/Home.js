@@ -10,8 +10,8 @@ function Home({ items, addToCart, removeFromCart, addToWishlist }){
     return(
         <div>
             <br />
-            <h2 className="intro" id='welcome' style={{fontSize: "50px"}}>Welcome to Harambee Arms!</h2>
-            <p className="intro" id='greeting'> Shop weapons, armor, tools, and magic items til your pockets run dry. You'll never find a better deal in all of Brittania!</p>
+            <h2 className="intro" id='welcome'>Welcome to Harambee Arms!</h2>
+            <p className="intro" id='greeting'> Here at Harambee Arms we sell firearms and firearms accessories. </p>
             <br />
             <h3 className="intro" id='featureTitle'>Featured Items:</h3>
             <div id='featList'>
