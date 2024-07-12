@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import 'semantic-ui-css/semantic.min.css';
 import { Card, Icon, Image, Button } from 'semantic-ui-react';
 
 function ItemCard({ item, addToCart, inCart, inWishlist, removeFromCart, addToWishlist, removeFromWishlist }){

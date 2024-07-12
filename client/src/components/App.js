@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import NavBar from './NavBar';
+import NavBar from './Navbar';
 import Account from './Account';
 import Home from './Home';
 import Shop from './Shop';
 import Cart from './Cart';
 import Wishlist from './Wishlist';
-import '../App.css';
+import './App.css';
 
 function App() {
   const [page, setPage] = useState('/')
