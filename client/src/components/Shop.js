@@ -3,7 +3,7 @@ import Inventory from './Inventory'
 
 function Shop({ items, addToCart, addToWishlist}){
 
-    const [filterBy, setFilterBy] = useState("weapon")
+    const [filterBy, setFilterBy] = useState("firearm")
     const [searchState, setSearchState] = useState("")
 
     const filteredItems = items.filter(
@@ -24,7 +24,7 @@ function Shop({ items, addToCart, addToWishlist}){
             <label>
             <strong>Filter by Category:</strong>
             <select onChange={handleFilterChange} value={filterBy}>
-                <option value="weapon">Firearms</option>
+                <option value="firearm">Firearms</option>
                 <option value="accessory">Accessories</option>
                 <option value="ammunition">Ammunitions</option>
             </select>
