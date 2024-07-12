@@ -24,10 +24,9 @@ function Shop({ items, addToCart, addToWishlist}){
             <label>
             <strong>Filter by Category:</strong>
             <select onChange={handleFilterChange} value={filterBy}>
-                <option value="weapon">Weapons</option>
-                <option value="armor">Armor</option>
-                <option value="tool">Tools</option>
-                <option value="magic_item">Magic Items</option>
+                <option value="weapon">Firearms</option>
+                <option value="accessory">Accessories</option>
+                <option value="ammunition">Ammunitions</option>
             </select>
             </label>
         <br />
