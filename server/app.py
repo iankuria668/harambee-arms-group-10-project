@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, session, make_response
+from flask import request, session, jsonify, make_response
 from flask_restful import Resource
 
 # Local imports
@@ -13,6 +13,56 @@ from config import app, db, api
 from models import Customer, Item, Order, OrderItem
 
 # Views go here!
+class Signup(Resource):
+    def post(self):
+        data = request.get_json()
+
+        try:
+            new_customer = Customer(
+                name = data['name'],
+                username = data['username'],
+                wallet = data['wallet'],
+                admin = False
+            )
+            new_customer.password_hash = data['password']
+            db.session.add(new_customer)
+            db.session.commit()
+            session['customer_id'] = new_customer.id
+
+            return make_response(new_customer.to_dict(), 201)
+
+        except Exception as e:
+            print(f"Exception: {e}")  # Log the exception
+            return make_response({'error': 'Invalid inputs'}, 400)
+class CheckSession(Resource):
+    def get(self):
+        customer_id =  session.get('customer_id')
+
+        if not customer_id:
+            return {'error': 'Unauthorized, please sign in'}, 401
+
+        current_customer = Customer.query.filter(Customer.id == customer_id).first()
+        return current_customer.to_dict(), 200
+
+class Login(Resource):
+    def post(self):
+        data = request.get_json()
+
+        check_customer = Customer.query.filter(Customer.username == data['username']).first()
+
+        if check_customer and check_customer.authenticate(data['password']):
+            session['customer_id'] = check_customer.id
+
+            return make_response(check_customer.to_dict(), 200)
+
+        return {'error': 'incorrect credentials'}, 401
+
+class Logout(Resource):
+    def delete(self):
+        if session.get('customer_id'):
+            session['customer_id'] = None
+            return {}, 204
+        return  {'error': 'Unauthorized'}, 401
 
 class Home(Resource):
     def get(self):
@@ -161,17 +211,11 @@ class OrderItemByID(Resource):
 
         return make_response({'message': 'OrderItem deleted successfully'}, 200)
 
-from flask import request, make_response
-from flask_restful import Resource
-from models import Customer, db
-
 class Customers(Resource):
     def get(self):
         customers = Customer.query.all()
         customers_list = [customer.to_dict() for customer in customers]
         return make_response(customers_list, 200)
-    
-
 
 class CustomerByID(Resource):
     def get(self, id):
@@ -205,6 +249,10 @@ class CustomerByID(Resource):
 
 
 api.add_resource(Home, '/')
+api.add_resource(Signup, '/signup', endpoint='signup')
+api.add_resource(CheckSession, '/check_session', endpoint='check_session')
+api.add_resource(Login, '/login', endpoint='login')
+api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(Items, '/items')
 api.add_resource(ItemsByCategory, '/items/<category>')
 api.add_resource(ItemsByID, '/items/<int:id>')
