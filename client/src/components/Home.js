@@ -42,6 +42,7 @@ function Home({ items, addToCart, removeFromCart, addToWishlist }){
                   </li>
                 </ul>
                 <p><a href="https://www.stylemetactical.com/blog/rules-of-gun-safety-for-adults-kids">Learn more about firearm safety</a></p>
+                <p><a href="https://www.firearms.or.ke/index.html">To Read on Requirements or Apply for a Gun License in Kenya</a></p>
               </div>
       
               {/* Other footer content goes here */}
