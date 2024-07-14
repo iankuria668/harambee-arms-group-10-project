@@ -11,11 +11,6 @@
   padding-right: 30px;
 }
 
-#navbar {
-  background-color: burlywood;
-  margin-top: 10px;
-}
-
 #header {
   background-color: rgba(255, 0, 0, 0.704);
   padding-left: 30px;
@@ -27,6 +22,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: large;
 }
 
 #navbar .NavLink {
