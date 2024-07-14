@@ -1,0 +1,96 @@
+.accountPieces, .accountpieces {
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    background-color: #303245;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    font-size: 18px;
+    height: 40px; /* Adjust height as needed */
+    outline: 0;
+    padding: 0 15px;
+    width: calc(100% - 30px); /* Adjust width with padding */
+    margin-bottom: 10px;
+  }
+  
+  .input:focus {
+    border: 2px solid #08d; /* Example focus state */
+  }
+  
+  .submit {
+    background-color: #08d;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    cursor: pointer;
+    font-size: 18px;
+    height: 40px; /* Adjust height as needed */
+    width: 100%;
+    text-align: center;
+  }
+  
+  .submit:hover {
+    background-color: #06b; /* Example hover state */
+  }
+  
+  .accountPieces h3, .accountpieces h3 {
+    color: #08d;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .accountPieces form, .accountpieces form {
+    background-color: #15172b;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  
+  .accountPieces label, .accountpieces label {
+    color: #eee;
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .accountPieces select, .accountpieces select,
+  .accountPieces input[type='text'], .accountPieces input[type='number'],
+  .accountpieces input[type='text'], .accountpieces input[type='number'] {
+    background-color: #303245;
+    border-radius: 8px;
+    border: 0;
+    color: #eee;
+    font-size: 16px;
+    height: 40px;
+    outline: 0;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .accountPieces select:focus, .accountpieces select:focus,
+  .accountPieces input[type='text']:focus, .accountPieces input[type='number']:focus,
+  .accountpieces input[type='text']:focus, .accountpieces input[type='number']:focus {
+    border: 2px solid #08d; /* Example focus state */
+  }
+  
+  .accountPieces button, .accountpieces button {
+    background-color: #08d;
+    border-radius: 12px;
+    border: 0;
+    color: #eee;
+    cursor: pointer;
+    font-size: 18px;
+    height: 40px; /* Adjust height as needed */
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .accountPieces button:hover, .accountpieces button:hover {
+    background-color: #06b; /* Example hover state */
+  }
+  

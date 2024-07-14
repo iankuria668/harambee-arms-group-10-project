@@ -24,7 +24,7 @@ function ItemCard({ item, addToCart, inCart, inWishlist, removeFromCart, addToWi
     
         <div style={{ marginLeft: '3%', paddingBottom: '2%', marginRight: '3%'}}>
         
-        <Card style={{ height: '380px'}}>
+        <Card style={{ height: '30px'}}>
             <div style={{ height: '60%', overflow: 'hidden' }}>
                 <Image
                     src={item.img_url}
