@@ -5,7 +5,7 @@ function NavBar() {
     return (
         <div>
             <header id='header'>
-                <h1 className='intro' style={{fontSize: "250px"}}>Now Entering Ye Olde Dragonmart</h1>
+                {/* <h1 className='intro' style={{fontSize: "250px"}}>Now Entering Ye Olde Dragonmart</h1> */}
             </header>
             <nav id='navbar'>
                 <NavLink className='NavLink' exact to='/'>Home</NavLink>
