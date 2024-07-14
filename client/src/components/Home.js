@@ -40,7 +40,7 @@ function Home({ items, addToCart, removeFromCart, addToWishlist }){
                     <img src="https://i.pinimg.com/474x/80/79/fd/8079fdfd4abe23f3c781bd75353ab5fa.jpg" alt="Rule 4 Icon" />
                     <p>Be sure of your target and what is beyond it.</p>
                   </li>
-                </ul>
+                </ul>x
                 <p><a href="https://www.firearms.or.ke/index.html">To Read on Requirements or Apply for a Gun License In Kenya.</a></p>
                 <p><a href="https://www.stylemetactical.com/blog/rules-of-gun-safety-for-adults-kids">Learn more about firearm safety</a></p>
               </div>
