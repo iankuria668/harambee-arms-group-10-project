@@ -22,9 +22,9 @@ function ItemCard({ item, addToCart, inCart, inWishlist, removeFromCart, addToWi
 
     return(
     
-        <div style={{ marginLeft: '5%', paddingBottom: '1%', marginRight: '5%'}}>
+        <div style={{ marginLeft: '3%', paddingBottom: '2%', marginRight: '3%'}}>
         
-        <Card style={{ height: '400px'}}>
+        <Card style={{ height: '380px'}}>
             <div style={{ height: '60%', overflow: 'hidden' }}>
                 <Image
                     src={item.img_url}
