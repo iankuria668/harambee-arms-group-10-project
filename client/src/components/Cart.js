@@ -15,7 +15,7 @@ function Cart({ inCart, setInCart, removeFromCart, wallet, setWallet }){
         // subtract from wallet
         if (wallet >= sumTotal) {
         setWallet(wallet - sumTotal)
-        alert('You will receive your package in 7-10 business days. Thanks for shopping with Dragonmart!')
+        alert('You will receive your package in 7-10 business days. Thanks for shopping with Harambee Arms!')
         // reset cart to empty
         setInCart([])}
 
