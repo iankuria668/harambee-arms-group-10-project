@@ -37,7 +37,7 @@ function Shop({ items, addToCart, addToWishlist}){
             </div>
             </div>
         <br />
-            <h2 className="intro" id='inventory'>Inventory: </h2>
+            <h2 className="intro" id='inventory'>              Inventory: </h2>
             <Inventory filteredItems={filteredItems} searchState={searchState} addToCart={addToCart} addToWishlist={addToWishlist}/>
 
         </div>
