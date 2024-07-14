@@ -62,7 +62,7 @@ class Item(db.Model, SerializerMixin):
     @validates('category')
     def validate_category(self, key, category):
         if not category:
-            raise ValueError('Category cannot be empty. Must be weapons, armor, tools, or magic items.')
+            raise ValueError('Category cannot be empty. Must be firearm, accessory or ammunition.')
         return category
 
     @validates('price')
