@@ -5,3 +5,98 @@
   --text: hsla(0, 0%, 100%, 0.88);
 }
 
+.NavLink {
+  padding-left: 30px;
+  align-items: center;
+  padding-right: 30px;
+}
+
+#navbar {
+  background-color: burlywood;
+  margin-top: 10px;
+}
+
+#header {
+  background-color: rgba(255, 0, 0, 0.704);
+  padding-left: 30px;
+  align-items: center;
+}
+
+.Card {
+  padding-bottom: 10px;
+}
+
+.accountPieces {
+  float: left;
+  padding-left: 30px;
+  padding-bottom: 50 px;
+  padding-top: 30px;
+  padding-right: 150px;
+}
+
+.intro {
+  font-family: fantasy;
+  
+}
+
+#featureTitle {
+  float: left;
+  padding-left: 30px;
+  font-size: 200%;
+}
+
+#featList {
+  padding-top: 75px;
+}
+
+.featuredlist {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1500px;
+  justify-content: center;
+  margin: auto;
+  padding-top: 75px
+}
+
+.filters{
+  padding-top: 25px;
+}
+
+.searchbar{
+  padding-top: 10px;
+}
+
+.mycart {
+  float: left;
+  padding-left: 30px;
+  padding-top:30px;
+  font-size: 200%;
+  font-family: fantasy;
+}
+
+#inventory {
+  float: left;
+  padding-left: 10px;
+  font-size: 200%;
+}
+
+.checkout {
+  float: right;
+  padding-bottom: 50px;
+  padding-right: 50px;
+}
+
+.cartback {
+  background-color: burlywood;
+}
+
+.total {
+  font-size: 200%;
+  color: goldenrod;
+}
+
+#wallet {
+  color: gold;
+  font-size: 125%;
+  background-color: black;
+}

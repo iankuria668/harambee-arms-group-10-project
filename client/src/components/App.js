@@ -7,6 +7,7 @@ import Shop from './Shop';
 import Cart from './Cart';
 import Wishlist from './Wishlist';
 import './App.css';
+import '../index.css';
 
 function App() {
   const [page, setPage] = useState('/')
