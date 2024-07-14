@@ -22,7 +22,7 @@ function Shop({ items, addToCart, addToWishlist}){
         <div>
             <div className='filters'>
             <label>
-            <strong>Filter by Category:</strong>
+            {/* <strong>Filter by Category:</strong> */}
             <select onChange={handleFilterChange} value={filterBy}>
                 <option value="firearm">Firearms</option>
                 <option value="accessory">Accessories</option>
@@ -31,13 +31,12 @@ function Shop({ items, addToCart, addToWishlist}){
             </label>
         <br />
             <div className='searchbar'>
-            <strong>Search item by name: </strong>
-            
-            <input className="prompt" value={searchState}  onChange={handleSearch}/>
+        
+            <input className="prompt" placeholder="Search item by name..." value={searchState}  onChange={handleSearch}/>
             </div>
             </div>
         <br />
-            <h2 className="intro" id='inventory'>              Inventory: </h2>
+            {/* <h2 className="intro" id='inventory'>              Inventory: </h2> */}
             <Inventory filteredItems={filteredItems} searchState={searchState} addToCart={addToCart} addToWishlist={addToWishlist}/>
 
         </div>
