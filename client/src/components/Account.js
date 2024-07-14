@@ -112,7 +112,7 @@ function Account({ wallet, setWallet, items }){
     }
 
     return (
-        <div>
+        <div className='accountContainer'>
             <div className='accountPieces'>
                 <h3 id='wallet'>Wallet: {wallet} GP</h3>
                 <form onSubmit={handleMoneySubmit}>
@@ -157,10 +157,9 @@ function Account({ wallet, setWallet, items }){
                     <label>Category: </label>
                     <select name='category' onChange={handleItemChange} value={formData.category}>
                         <option value=''> </option>
-                        <option value='weapon'>weapon</option>
-                        <option value='armor'>armor</option>
-                        <option value='tool'>tool</option>
-                        <option value='magic_item'>magic_item</option>
+                        <option value='firearm'>Firearm</option>
+                        <option value='accessory'>Accessory</option>
+                        <option value='ammunition'>Ammunition</option>
                     </select>
                 <br />
                     <label>Price: </label>
@@ -187,7 +186,7 @@ function Account({ wallet, setWallet, items }){
                     <button onClick={deleteItem}>DELETE ITEM</button>
                 </div>
             </div>
-            <div className='accountpieces'>
+            <div className='accountPieces'>
             <h3>Update Item Price - Admin Only:</h3>
                 <form id='updateform'  onSubmit={handleNewPrice}>
                     <label>Enter Item ID to Update: </label>
@@ -224,8 +223,24 @@ function Account({ wallet, setWallet, items }){
         <br />
         <br />
         <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
         </div>
+   
     )
 }
 

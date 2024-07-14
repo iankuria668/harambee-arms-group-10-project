@@ -278,39 +278,43 @@ footer {
   text-align: center;
 }
 
-/* ACCOUNT*/
-.accountPieces, .accountpieces {
-  margin-bottom: 20px;
+.accountContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Add space between the divs */
+  padding: 20px; /* Optional: add padding to the container */
 }
 
-.input {
-  background-color: #303245;
-  border-radius: 12px;
-  border: 0;
+.accountPieces {
+  flex: 1 1 calc(25% - 40px); /* Adjust width and include space for margins */
   box-sizing: border-box;
-  color: #eee;
-  font-size: 18px;
-  height: 40px; /* Adjust height as needed */
-  outline: 0;
-  padding: 0 15px;
-  width: 100%;
-  margin-bottom: 10px;
+  padding: 20px; /* Add padding inside each div */
+  margin: 10px; /* Add margin between divs */
+  border: 1px solid #ccc; /* Add border to each div */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for floating effect */
+  background-color: #f9f9f9; /* Optional: add background color */
 }
 
-.submit {
-  background-color: #08d;
-  border-radius: 12px;
-  border: 0;
-  box-sizing: border-box;
-  color: #eee;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Add space between form elements */
+}
+
+input, select, button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #007BFF; /* Button color */
+  color: #fff;
+  border: none;
   cursor: pointer;
-  font-size: 18px;
-  height: 40px; /* Adjust height as needed */
-  width: 100%;
-  text-align: center;
 }
 
-.submit:active {
-  background-color: #06b;
+button:hover {
+  background-color: #0056b3; /* Darker button color on hover */
 }
-
