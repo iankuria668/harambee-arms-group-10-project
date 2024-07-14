@@ -24,12 +24,13 @@
 
 #navbar {
   background-color: #444;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #navbar .NavLink {
-  float: left;
-  display: block;
+  display: inline-block;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
@@ -43,13 +44,12 @@
 }
 
 #navbar .NavLink.active {
-  background-color: #4CAF50;
-  color: white;
+  background-color: whitesmoke;
+  color: black;
 }
 
 .Card {
   padding-bottom: 10px;
-  
 }
 
 .accountPieces {
