@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-function Account({ wallet, setWallet, items }) {
+function Account({ user, wallet, setWallet, items }) {
     const [amount, setAmount] = useState('');
     const [id, setId] = useState('');
     const [newPrice, setNewPrice] = useState('');
@@ -19,12 +19,27 @@ function Account({ wallet, setWallet, items }) {
     };
 
     const handleMoneyChange = (event) => {
-        const amount = parseInt(event.target.value);
+        const amount = parseInt(event.target.value, 10); 
         setAmount(amount);
     };
 
     const addMoney = (amount) => {
-        setWallet((wallet) => wallet + amount);
+        if (typeof setWallet === 'function') {  
+            setWallet(wallet + amount);
+            fetch('/update_wallet', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accepts': 'application/json',
+                },
+                body: JSON.stringify({ wallet: wallet + amount }),
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(err => console.error('Error:', err));
+        } else {
+            console.error('setWallet is not a function');
+        }
     };
 
     const handleItemChange = (event) => {
@@ -49,7 +64,8 @@ function Account({ wallet, setWallet, items }) {
         .then((newItem) => {
             console.log(newItem);
             resetForm();
-        });
+        })
+        .catch(err => console.error('Error:', err));
     };
 
     const handleIdChange = (event) => {
@@ -65,7 +81,8 @@ function Account({ wallet, setWallet, items }) {
         .then(() => {
             console.log('Item deleted!');
             setId('');
-        });
+        })
+        .catch(err => console.error('Error:', err));
     };
 
     const handlePriceChange = (event) => {
@@ -88,7 +105,8 @@ function Account({ wallet, setWallet, items }) {
         .then((updatedItem) => {
             console.log(updatedItem);
             setNewPrice('');
-        });
+        })
+        .catch(err => console.error('Error:', err));
     };
 
     const resetForm = () => {
@@ -101,10 +119,13 @@ function Account({ wallet, setWallet, items }) {
         });
     };
 
+    if (!user) return <div>Loading...</div>;
+
     return (
         <div className='accountContainer'>
             <div className='accountPieces'>
-                <h3 id='wallet'>Wallet: {wallet} GP</h3>
+                <h1>Welcome, {user.name}</h1>
+                <p>Wallet: ${wallet}</p>
                 <form onSubmit={handleMoneySubmit}>
                     <input
                         onChange={handleMoneyChange}
@@ -116,92 +137,94 @@ function Account({ wallet, setWallet, items }) {
                     <button type='submit' id='addmoney'>Add Money</button>
                 </form>
             </div>
-            <div className='accountPieces'>
-                <h3>Add New Item - Admin Only:</h3>
-                <form id='addnewitem' onSubmit={handleItemSubmit}>
-                    <label>Title: </label>
-                    <input
-                        type='text'
-                        name='title'
-                        onChange={handleItemChange}
-                        value={formData.title}
-                        placeholder='Enter New Item Title'
-                    />
-                    <br />
-                    <label>Image Url: </label>
-                    <input
-                        type='text'
-                        name='img_url'
-                        onChange={handleItemChange}
-                        value={formData.img_url}
-                        placeholder='Enter New Item Image URL'
-                    />
-                    <br />
-                    <label>Description: </label>
-                    <input
-                        type='text'
-                        name='description'
-                        onChange={handleItemChange}
-                        value={formData.description}
-                        placeholder='Enter New Item Description'
-                    />
-                    <br />
-                    <label>Category: </label>
-                    <select name='category' onChange={handleItemChange} value={formData.category}>
-                        <option value=''> </option>
-                        <option value='firearm'>Firearm</option>
-                        <option value='accessory'>Accessory</option>
-                        <option value='ammunition'>Ammunition</option>
-                    </select>
-                    <br />
-                    <label>Price: </label>
-                    <input
-                        type='number'
-                        name='price'
-                        onChange={handleItemChange}
-                        value={formData.price}
-                        placeholder='Enter New Item Price'
-                    />
-                    <br />
-                    <button type='submit' id='newItem'>Add Item to Inventory</button>
-                </form>
-            </div>
-            <div className='accountPieces'>
-                <h3>Remove Item from Inventory - Admin Only:</h3>
+            {user.admin && (
                 <div>
-                    <label>Enter Item ID: </label>
-                    <input
-                        onChange={handleIdChange}
-                        type='number'
-                        name='delete'
-                        value={id}
-                    />
-                    <button onClick={deleteItem}>DELETE ITEM</button>
+                    <h2>Admin Features</h2>
+                    <p>Here you can manage items, orders, and more.</p>
+                    <div className='accountPieces'>
+                        <h3>Add New Item:</h3>
+                        <form id='addnewitem' onSubmit={handleItemSubmit}>
+                            <label>Title: </label>
+                            <input
+                                type='text'
+                                name='title'
+                                onChange={handleItemChange}
+                                value={formData.title}
+                                placeholder='Enter New Item Title'
+                            />
+                            <br />
+                            <label>Image Url: </label>
+                            <input
+                                type='text'
+                                name='img_url'
+                                onChange={handleItemChange}
+                                value={formData.img_url}
+                                placeholder='Enter New Item Image URL'
+                            />
+                            <br />
+                            <label>Description: </label>
+                            <input
+                                type='text'
+                                name='description'
+                                onChange={handleItemChange}
+                                value={formData.description}
+                                placeholder='Enter New Item Description'
+                            />
+                            <br />
+                            <label>Category: </label>
+                                <select name='category' onChange={handleItemChange} value={formData.category}>
+                                    <option value=''> </option>
+                                    <option value='firearm'>Firearm</option>
+                                    <option value='accessory'>Accessory</option>
+                                    <option value='ammunition'>Ammunition</option>
+                                </select>
+                            <br />
+                            <label>Price: </label>
+                            <input
+                                type='number'
+                                name='price'
+                                onChange={handleItemChange}
+                                value={formData.price}
+                                placeholder='Enter New Item Price'
+                            />
+                            <br />
+                            <button type='submit' id='additem'>Add Item</button>
+                        </form>
+                    </div>
+                    <div className='accountPieces'>
+                        <h3>Update Item Price:</h3>
+                        <form id='updateprice' onSubmit={handleNewPrice}>
+                            <label>Item ID: </label>
+                            <input
+                                type='text'
+                                value={id}
+                                onChange={handleIdChange}
+                                placeholder='Enter Item ID'
+                            />
+                            <br />
+                            <label>New Price: </label>
+                            <input
+                                type='number'
+                                value={newPrice}
+                                onChange={handlePriceChange}
+                                placeholder='Enter New Price'
+                            />
+                            <br />
+                            <button type='submit'>Update Price</button>
+                        </form>
+                    </div>
+                    <div className='accountPieces'>
+                        <h3>Delete Item:</h3>
+                        <input
+                            type='text'
+                            value={id}
+                            onChange={handleIdChange}
+                            placeholder='Enter Item ID to delete'
+                        />
+                        <button onClick={deleteItem}>Delete Item</button>
+                    </div>
                 </div>
-            </div>
-            <div className='accountPieces'>
-                <h3>Update Item Price - Admin Only:</h3>
-                <form id='updateform' onSubmit={handleNewPrice}>
-                    <label>Enter Item ID to Update: </label>
-                    <input
-                        onChange={handleIdChange}
-                        type='number'
-                        name='id'
-                        value={id}
-                    />
-                    <br />
-                    <label>Enter New Price: </label>
-                    <input
-                        onChange={handlePriceChange}
-                        type='number'
-                        name='newprice'
-                        value={newPrice}
-                        placeholder='Enter New Item Price'
-                    />
-                    <br />
-                    <button type='submit' id='newPrice'>Update Price</button>
-                </form>
-            </div>
+            )}
         </div>
     );
 }
