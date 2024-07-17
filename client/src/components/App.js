@@ -15,8 +15,9 @@ function App() {
   const [items, setItems] = useState([]);
   const [inCart, setInCart] = useState([]);
   const [inWishlist, setInWishlist] = useState([]);
-  const [wallet, setWallet] = useState(0);
+  const [wallet, setWallet] = useState(0);  
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,8 +30,16 @@ function App() {
     const token = localStorage.getItem('jwt');
     if (token) {
       setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
+      fetch('/check_session', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        setUser(data);
+        setWallet(data.wallet);  // Set the wallet from the fetched user data
+      });
     }
   }, []);
 
@@ -38,8 +47,8 @@ function App() {
     const cartItems = inCart.find((item) => item.id === addedItem.id);
     if (!cartItems) {
       setInCart([...inCart, addedItem]);
+      alert('Added to cart');
     }
-    alert('Added to ');
   };
 
   const removeFromCart = (removedItem) => {
@@ -51,8 +60,8 @@ function App() {
     const wished = inWishlist.find((item) => item.id === wishItem.id);
     if (!wished) {
       setInWishlist([...inWishlist, wishItem]);
+      alert('Added to wishlist');
     }
-    alert('Added to wishlist');
   };
 
   const removeFromWishlist = (removeWish) => {
@@ -60,15 +69,19 @@ function App() {
     setInWishlist(editedWishlist);
   };
 
-  const handleLogin = (data) => {
-    localStorage.setItem('jwt', data.access_token);
+  const handleLogin = (userData, token) => {
+    localStorage.setItem('jwt', token);
     setIsAuthenticated(true);
+    setUser(userData);
+    setWallet(userData.wallet);  
     navigate('/');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('jwt');
     setIsAuthenticated(false);
+    setUser(null);
+    setWallet(0);  
     navigate('/login');
   };
 
@@ -79,7 +92,7 @@ function App() {
         <Route path='/shop' element={<Shop items={items} addToCart={addToCart} addToWishlist={addToWishlist} />} />
         <Route path='/wishlist' element={<Wishlist inWishlist={inWishlist} setInWishlist={setInWishlist} removeFromWishlist={removeFromWishlist} addToCart={addToCart} />} />
         <Route path='/cart' element={<Cart inCart={inCart} setInCart={setInCart} removeFromCart={removeFromCart} wallet={wallet} setWallet={setWallet} />} />
-        <Route path='/account' element={<Account wallet={wallet} setWallet={setWallet} items={items} />} />
+        <Route path='/account' element={<Account user={user} wallet={wallet} setWallet={setWallet} items={items} />} />
         <Route path='/' element={<Home items={items} addToCart={addToCart} removeFromCart={removeFromCart} addToWishlist={addToWishlist} />} />
         <Route path='/signup' element={<Signup onSignup={handleLogin} />} />
         <Route path='/login' element={<Login onLogin={handleLogin} />} />
