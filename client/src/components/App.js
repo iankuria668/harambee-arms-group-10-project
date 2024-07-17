@@ -39,6 +39,7 @@ function App() {
     if (!cartItems) {
       setInCart([...inCart, addedItem]);
     }
+    alert('Added to cart');
   };
 
   const removeFromCart = (removedItem) => {
