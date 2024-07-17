@@ -42,7 +42,7 @@ class Signup(Resource):
             db.session.commit()
             access_token = create_access_token(identity=new_customer)
 
-            return make_response({"user": new_customer.to_dict(), 'access_token': access_token}, 201)
+            return make_response({"user": new_customer.to_dict(), 'access_token': access_token, 'admin': new_customer.admin}, 201)
 
         except Exception as e:
             print(f"Exception: {e}")  # Log the exception
@@ -51,7 +51,7 @@ class Signup(Resource):
 class CheckSession(Resource):
     @jwt_required()
     def get(self):
-        return current_user.to_dict(), 200
+        return {**current_user.to_dict(), 'admin': current_user.admin}, 200
 
 class Login(Resource):
     def post(self):
@@ -61,7 +61,7 @@ class Login(Resource):
 
         if check_customer and check_customer.authenticate(data['password']):
             access_token = create_access_token(identity=check_customer)
-            return make_response({"user": check_customer.to_dict(), 'access_token': access_token}, 200)
+            return make_response({"user": check_customer.to_dict(), 'access_token': access_token, 'admin': check_customer.admin}, 200)
 
         return {'error': 'incorrect credentials'}, 401
 
