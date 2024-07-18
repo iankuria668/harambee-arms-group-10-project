@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 import NavBar from './Navbar';
 import Account from './Account';
 import Home from './Home';
@@ -15,7 +15,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [inCart, setInCart] = useState([]);
   const [inWishlist, setInWishlist] = useState([]);
-  const [wallet, setWallet] = useState(0);  
+  const [wallet, setWallet] = useState(0);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ function App() {
       .then(res => res.json())
       .then(data => {
         setUser(data);
-        setWallet(data.wallet);  // Set the wallet from the fetched user data
+        setWallet(data.wallet);
       });
     }
   }, []);
@@ -73,7 +73,7 @@ function App() {
     localStorage.setItem('jwt', token);
     setIsAuthenticated(true);
     setUser(userData);
-    setWallet(userData.wallet);  
+    setWallet(userData.wallet);
     navigate('/');
   };
 
@@ -81,7 +81,7 @@ function App() {
     localStorage.removeItem('jwt');
     setIsAuthenticated(false);
     setUser(null);
-    setWallet(0);  
+    setWallet(0);
     navigate('/login');
   };
 
@@ -89,11 +89,11 @@ function App() {
     <div className='App'>
       {isAuthenticated && <NavBar onLogout={handleLogout} />}
       <Routes>
-        <Route path='/shop' element={<Shop items={items} addToCart={addToCart} addToWishlist={addToWishlist} />} />
-        <Route path='/wishlist' element={<Wishlist inWishlist={inWishlist} setInWishlist={setInWishlist} removeFromWishlist={removeFromWishlist} addToCart={addToCart} />} />
-        <Route path='/cart' element={<Cart inCart={inCart} setInCart={setInCart} removeFromCart={removeFromCart} wallet={wallet} setWallet={setWallet} />} />
-        <Route path='/account' element={<Account user={user} wallet={wallet} setWallet={setWallet} items={items} />} />
-        <Route path='/' element={<Home items={items} addToCart={addToCart} removeFromCart={removeFromCart} addToWishlist={addToWishlist} />} />
+        <Route path='/' element={isAuthenticated ? <Home items={items} addToCart={addToCart} removeFromCart={removeFromCart} addToWishlist={addToWishlist} /> : <Navigate to="/login" />} />
+        <Route path='/shop' element={isAuthenticated ? <Shop items={items} addToCart={addToCart} addToWishlist={addToWishlist} /> : <Navigate to="/login" />} />
+        <Route path='/wishlist' element={isAuthenticated ? <Wishlist inWishlist={inWishlist} setInWishlist={setInWishlist} removeFromWishlist={removeFromWishlist} addToCart={addToCart} /> : <Navigate to="/login" />} />
+        <Route path='/cart' element={isAuthenticated ? <Cart inCart={inCart} setInCart={setInCart} removeFromCart={removeFromCart} wallet={wallet} setWallet={setWallet} /> : <Navigate to="/login" />} />
+        <Route path='/account' element={isAuthenticated ? <Account user={user} wallet={wallet} setWallet={setWallet} items={items} /> : <Navigate to="/login" />} />
         <Route path='/signup' element={<Signup onSignup={handleLogin} />} />
         <Route path='/login' element={<Login onLogin={handleLogin} />} />
       </Routes>
