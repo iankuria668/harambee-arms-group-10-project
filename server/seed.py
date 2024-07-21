@@ -68,15 +68,22 @@ if __name__ == '__main__':
 
         db.session.commit()
 
+        
         print('Seeding customer data')
-        customer_1 = Customer(name = 'John Doe', username = 'johndoe', wallet = 1000.00, admin = True)
-        customer_1.password_hash = 'password1234'
-        customer_2 = Customer(name = 'Jane Smith', username= 'janesmith', wallet = 1500.00, admin = True)
-        customer_2.password_hash = 'password5678'
+        customer_1 = Customer(name = 'Sharon Byegon', username = 'sharonb', wallet = 1000.00, admin = True)
+        customer_1.password_hash = 'sharon1234'
+        customer_2 = Customer(name = 'Maria Kamau', username= 'mariakamau', wallet = 1500.00, admin = True)
+        customer_2.password_hash = 'maria1234'
         customer_3 = Customer(name = 'Jim Bean', username = 'jimbean', wallet = 500.00, admin = False)
         customer_3.password_hash = 'password10'
         customer_4 = Customer(name = 'Sara Conner', username = 'saraconner', wallet = 2000.00, admin = False)
         customer_4.password_hash = 'password123'
+        customer_5 = Customer(name = 'Ian Kuria', username = 'iankuria', wallet = 1200.00, admin = True)
+        customer_5.password_hash = 'ian1234'
+        customer_6 = Customer(name = 'Charles Kagoko', username = 'charleskagoko', wallet = 3000.00, admin = True)
+        customer_6.password_hash = 'charles1234'
+        customer_7 = Customer(name = 'Lee Mwangi', username = 'leemwangi', wallet = 3000.00, admin = True)
+        customer_7.password_hash = 'lee1234'
 
         print('Seeding orderitem data')
         order_item_1 = OrderItem(quantity = 1, order_id = 1, item_id = 1)
@@ -87,7 +94,7 @@ if __name__ == '__main__':
         order_1  = Order(customer_id = 1, total = 700.00 )
 
         print('Committing customer seed')
-        db.session.add_all([customer_1, customer_2, customer_3, customer_4])
+        db.session.add_all([customer_1, customer_2, customer_3, customer_4,customer_5,customer_6,customer_7])
         db.session.commit()
 
         print('Committing orderitem seeds')
