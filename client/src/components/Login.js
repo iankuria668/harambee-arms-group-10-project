@@ -40,6 +40,7 @@ function Login({ onLogin }) {
         <div className="login-container">
             <form onSubmit={handleSubmit}>
                 <h2>Welcome to Harambee Arms</h2>
+                <img src="https://i.pinimg.com/736x/b4/20/27/b42027c61eda0f45716b8f7b25e3c563.jpg" />
                 <input
                     type="text"
                     value={username}
