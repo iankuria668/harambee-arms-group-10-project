@@ -1,5 +1,9 @@
-body {
+ .signup-container, .login-container {
   background-image: url("./rambo.gif");
+  background-size: cover;
+  height: 100vh;
+  padding:0;
+  margin:0;
 }
 
 .accountPieces, .accountpieces {

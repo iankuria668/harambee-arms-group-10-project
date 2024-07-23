@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Account.css';
 
 function Account({ user, wallet, setWallet, items }) {
     const [amount, setAmount] = useState('');
