@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+ipython = "==7.28.0"
 ipdb = "0.13.9"
 flask = "*"
 flask-sqlalchemy = "3.0.3"
@@ -13,6 +14,8 @@ sqlalchemy-serializer = "*"
 flask-restful = "*"
 flask-cors = "*"
 faker = "*"
+flask-jwt = "*"
+
 
 [requires]
 python_full_version = "3.8.13"

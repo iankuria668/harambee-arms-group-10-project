@@ -1,3 +1,11 @@
+ .signup-container, .login-container {
+  background-image: url("https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnJjbGlxbXZ0bXQwZTkzczhsaGNsb242eW5hdXlieXB0djZjaGRsZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/JwTr3r2TFU4kQtQQR3/giphy.gif");
+  background-size: cover;
+  height: 100vh;
+  padding:0;
+  margin:0;
+}
+
 .accountPieces, .accountpieces {
     margin-bottom: 20px;
   }
